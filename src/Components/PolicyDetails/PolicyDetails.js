@@ -59,14 +59,6 @@ class PolicyDetails extends Component {
                 </CardContent>
               </Card>
             </Grid>
-            {/* <Card>
-              <CardContent>
-                <Typography variant="h6">Policy Reference:</Typography>
-              </CardContent>
-              <CardContent>Word of the day</CardContent>
-              <CardContent>Word of the day</CardContent>
-              <CardContent>Word of the day</CardContent>
-            </Card> */}
           </Grid>
         </Paper>
       </Grid>
