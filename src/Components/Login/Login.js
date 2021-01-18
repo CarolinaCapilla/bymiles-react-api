@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import './Login.css'
+import React, { Component } from 'react';
+import './Login.css';
 
-import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import purple from '@material-ui/core/colors/purple'
+import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import purple from '@material-ui/core/colors/purple';
 class Login extends Component {
   state = {
     username: '',
     password: '',
-  }
+  };
 
   render() {
     return (
@@ -44,8 +44,8 @@ class Login extends Component {
           </Button>
         </Paper>
       </Grid>
-    )
+    );
   }
 }
 
-export default Login
+export default Login;
