@@ -1,0 +1,11 @@
+.paperStyle {
+  padding: 20px;
+  height: 50vh;
+  width: 280px;
+  margin: 50px auto;
+}
+
+.textInput {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
