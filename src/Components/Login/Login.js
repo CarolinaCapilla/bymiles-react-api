@@ -9,31 +9,31 @@ class Login extends Component {
   state = {
     username: '',
     password: '',
-    type: '',
+    accessToken: '',
   };
-
+  componentDidMount() {
+    this.postDataHandler();
+  }
   postDataHandler = () => {
     const userLogin = {
       username: this.state.username,
       password: this.state.password,
       type: 'USER_PASSWORD_AUTH',
     };
-    const headers = {
+    const postHeaders = {
       environment: 'mock',
       'Content-type': 'application/json',
     };
     axios
       .post('https://api.bybits.co.uk/auth/token', userLogin, {
-        headers: headers,
+        headers: postHeaders,
       })
       .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          console.log('Login successfull');
-        }
+        console.log(response.data.access_token);
         this.setState({
-          type: response.data.access_token,
+          accessToken: response.data.access_token,
         });
+        console.log(this.state.accessToken);
       });
   };
 

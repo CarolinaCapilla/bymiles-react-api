@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
-import './PolicyDetails.css';
+import axios from 'axios';
 
+import './PolicyDetails.css';
 import { Grid, Paper, Card, CardContent, Typography } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 import grey from '@material-ui/core/colors/grey';
 
 class PolicyDetails extends Component {
   state = {
-    policyReference: '',
+    policyRef: '',
     coverType: '',
     car: '',
     address: '',
   };
-
+  componentDidMount() {
+    this.getDataHandler();
+  }
+  getDataHandler = () => {
+    const getHeaders = {
+      environment: 'mock',
+      Authorization: 'Bearer MuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0zX3JkdldSMGs',
+      'Content-type': 'application/json',
+    };
+    axios
+      .get('https://api.bybits.co.uk/policys/details', {
+        headers: getHeaders,
+      })
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          policyRef: response.data.policy.policy_ref,
+          coverType: response.data.policy.cover,
+          car:
+            response.data.vehicle.colour +
+            response.data.vehicle.make +
+            response.data.vehicle.model,
+          address:
+            response.data.policy.address.line_1 +
+            response.data.policy.address.line_2 +
+            response.data.policy.address.postcode,
+        });
+      });
+  };
   render() {
     return (
       <Grid>
@@ -30,7 +59,7 @@ class PolicyDetails extends Component {
                     Policy Reference:
                   </Typography>
                   <Typography style={{ color: grey[600] }}>
-                    apple orange pear
+                    {this.state.policyRef}
                   </Typography>
                 </CardContent>
                 <CardContent>
@@ -38,7 +67,7 @@ class PolicyDetails extends Component {
                     Cover Type:
                   </Typography>
                   <Typography style={{ color: grey[600] }}>
-                    Comprehensive
+                    {this.state.coverType}
                   </Typography>
                 </CardContent>
                 <CardContent>
@@ -46,7 +75,7 @@ class PolicyDetails extends Component {
                     Car:
                   </Typography>
                   <Typography style={{ color: grey[600] }}>
-                    Tesla S-Black
+                    {this.state.car}
                   </Typography>
                 </CardContent>
                 <CardContent>
@@ -54,7 +83,7 @@ class PolicyDetails extends Component {
                     Address:
                   </Typography>
                   <Typography style={{ color: grey[600] }}>
-                    69B Deptford High Street
+                    {this.state.address}
                   </Typography>
                 </CardContent>
               </Card>
