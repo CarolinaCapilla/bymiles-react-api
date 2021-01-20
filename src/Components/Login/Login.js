@@ -24,9 +24,6 @@ export const Login = () => {
       [event.target.name]: event.target.value,
     });
   };
-  // componentDidMount() {
-  //   this.postDataHandler();
-  // }
   const formSubmitHandler = (event) => {
     event.preventDefault();
     setData({
@@ -47,17 +44,19 @@ export const Login = () => {
       .post('https://api.bybits.co.uk/auth/token', userLogin, {
         headers: postHeaders,
       })
+      // .then((response) => {
+      //   // console.log(response);
+      //   // accessToken.useState({ accessToken: response.data.access_token });
+      //   // console.log(accessToken);
+      //   if (response.ok) {
+      //     return response;
+      //   }
+      //   throw response;
+      // })
       .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          return response;
-        }
-        throw response;
-      })
-      .then((resJson) => {
         dispatch({
           type: 'LOGIN',
-          payload: resJson,
+          payload: response,
         });
       })
       .catch((error) => {
@@ -67,13 +66,6 @@ export const Login = () => {
           errorMessage: error.message || error.statusText,
         });
       });
-    // .then((response) => {
-    //   console.log(response.data.access_token);
-    //   this.setState({
-    //     accessToken: response.data.access_token,
-    //   });
-    //   console.log(this.state.accessToken);
-    // });
   };
 
   return (
@@ -118,17 +110,17 @@ export const Login = () => {
               color="primary"
               disabled={data.isSubmitting}
             >
-              {data.errorMessage && (
-                <Alert severity="error">
-                  <AlertTitle>Error</AlertTitle>
-                  <span>{data.errorMessage}</span>
-                </Alert>
-              )}
               {data.isSubmitting ? 'Loading' : 'Sign in'}
             </Button>
           </form>
         </Grid>
       </Paper>
+      {data.errorMessage && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          <span>{data.errorMessage}</span>
+        </Alert>
+      )}
     </Grid>
   );
 };

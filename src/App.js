@@ -41,8 +41,6 @@ function App() {
     <AuthContext.Provider value={{ state, dispatch }}>
       <div className="App">
         {!state.isAuthenticated ? <Login /> : <PolicyDetails />}
-        {/* <Login /> */}
-        {/* <PolicyDetails /> */}
       </div>
     </AuthContext.Provider>
   );
