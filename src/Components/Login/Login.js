@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 
 import './Login.css';
-import { AuthContext } from '../App';
+import { AuthContext } from '../../App';
 import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import purple from '@material-ui/core/colors/purple';
 
 export const Login = () => {
+  const { dispatch } = React.useContext(AuthContext);
   const initialState = {
     username: '',
     password: '',
@@ -26,7 +27,8 @@ export const Login = () => {
   // componentDidMount() {
   //   this.postDataHandler();
   // }
-  const postDataHandler = () => {
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
     setData({
       ...data,
       isSubmitting: true,
@@ -46,12 +48,31 @@ export const Login = () => {
         headers: postHeaders,
       })
       .then((response) => {
-        console.log(response.data.access_token);
-        this.setState({
-          accessToken: response.data.access_token,
+        if (response.ok) {
+          return response;
+        }
+        throw response;
+      })
+      .then((resJson) => {
+        dispatch({
+          type: 'LOGIN',
+          payload: resJson,
         });
-        console.log(this.state.accessToken);
+      })
+      .catch((error) => {
+        setData({
+          ...data,
+          isSubmitting: false,
+          errorMessage: error.message || error.statusText,
+        });
       });
+    // .then((response) => {
+    //   console.log(response.data.access_token);
+    //   this.setState({
+    //     accessToken: response.data.access_token,
+    //   });
+    //   console.log(this.state.accessToken);
+    // });
   };
 
   return (
@@ -63,7 +84,7 @@ export const Login = () => {
           </Avatar>
           <h2>Sign in</h2>
 
-          <form>
+          <form onSubmit={formSubmitHandler}>
             <Grid className="textInput">
               <TextField
                 fullWidth
@@ -90,7 +111,6 @@ export const Login = () => {
               </Grid>
             </Grid>
             <Button
-              onClick={postDataHandler}
               fullWidth
               type="submit"
               variant="contained"

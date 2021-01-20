@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import './PolicyDetails.css';
@@ -6,17 +6,17 @@ import { Grid, Paper, Card, CardContent, Typography } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 import grey from '@material-ui/core/colors/grey';
 
-class PolicyDetails extends Component {
-  state = {
-    policyRef: '',
-    coverType: '',
-    car: '',
-    address: '',
-  };
-  componentDidMount() {
-    this.getDataHandler();
-  }
-  getDataHandler = () => {
+export const PolicyDetails = ({ props }) => {
+  // state = {
+  //   policyRef: '',
+  //   coverType: '',
+  //   car: '',
+  //   address: '',
+  // };
+  // componentDidMount() {
+  //   this.getDataHandler();
+  // }
+  const getDataHandler = () => {
     const getHeaders = {
       environment: 'mock',
       Authorization: 'Bearer MuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0zX3JkdldSMGs',
@@ -42,57 +42,55 @@ class PolicyDetails extends Component {
         });
       });
   };
-  render() {
-    return (
-      <Grid>
-        <Paper elevation={10} className="policyStyle">
-          <Grid
-            align="center"
-            style={{ color: purple[200] }}
-            className="textInput"
-          >
-            <h2>My Policy</h2>
-            <Grid>
-              <Card style={{ border: 'none', boxShadow: 'none' }}>
-                <CardContent>
-                  <Typography variant="h6" style={{ color: grey[900] }}>
-                    Policy Reference:
-                  </Typography>
-                  <Typography style={{ color: grey[600] }}>
-                    {this.state.policyRef}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography variant="h6" style={{ color: grey[900] }}>
-                    Cover Type:
-                  </Typography>
-                  <Typography style={{ color: grey[600] }}>
-                    {this.state.coverType}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography variant="h6" style={{ color: grey[900] }}>
-                    Car:
-                  </Typography>
-                  <Typography style={{ color: grey[600] }}>
-                    {this.state.car}
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <Typography variant="h6" style={{ color: grey[900] }}>
-                    Address:
-                  </Typography>
-                  <Typography style={{ color: grey[600] }}>
-                    {this.state.address}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+  return (
+    <Grid>
+      <Paper elevation={10} className="policyStyle">
+        <Grid
+          align="center"
+          style={{ color: purple[200] }}
+          className="textInput"
+        >
+          <h2>My Policy</h2>
+          <Grid>
+            <Card style={{ border: 'none', boxShadow: 'none' }}>
+              <CardContent>
+                <Typography variant="h6" style={{ color: grey[900] }}>
+                  Policy Reference:
+                </Typography>
+                <Typography style={{ color: grey[600] }}>
+                  {props.policyRef}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="h6" style={{ color: grey[900] }}>
+                  Cover Type:
+                </Typography>
+                <Typography style={{ color: grey[600] }}>
+                  {props.coverType}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="h6" style={{ color: grey[900] }}>
+                  Car:
+                </Typography>
+                <Typography style={{ color: grey[600] }}>
+                  {props.car}
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="h6" style={{ color: grey[900] }}>
+                  Address:
+                </Typography>
+                <Typography style={{ color: grey[600] }}>
+                  {props.address}
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
-        </Paper>
-      </Grid>
-    );
-  }
-}
+        </Grid>
+      </Paper>
+    </Grid>
+  );
+};
 
 export default PolicyDetails;
