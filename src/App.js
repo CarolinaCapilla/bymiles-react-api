@@ -1,15 +1,47 @@
 import React from 'react';
 
-// import Login from './Components/Login/Login';
+import Login from './Components/Login/Login';
 import PolicyDetails from './Components/PolicyDetails/PolicyDetails';
 import './App.css';
 
+export const AuthContext = React.createContext();
+const initialState = {
+  isAuthenticated: false,
+  user: null,
+  token: null,
+};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
+      localStorage.setItem('token', JSON.stringify(action.payload.token));
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
+    case 'LOGOUT':
+      localStorage.clear();
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+      };
+    default:
+      return state;
+  }
+};
 function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
-    <div className="App">
-      {/* <Login /> */}
-      <PolicyDetails />
-    </div>
+    <AuthContext.Provider value={{ state, dispatch }}>
+      <div className="App">
+        {!state.isAuthenticated ? <Login /> : <PolicyDetails />}
+        {/* <Login /> */}
+        {/* <PolicyDetails /> */}
+      </div>
+    </AuthContext.Provider>
   );
 }
 

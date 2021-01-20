@@ -45,7 +45,7 @@ class PolicyDetails extends Component {
   render() {
     return (
       <Grid>
-        <Paper elevation={10} className="paperStyle">
+        <Paper elevation={10} className="policyStyle">
           <Grid
             align="center"
             style={{ color: purple[200] }}

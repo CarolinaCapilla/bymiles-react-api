@@ -1,23 +1,40 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import './Login.css';
+import { AuthContext } from '../App';
 import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import purple from '@material-ui/core/colors/purple';
-class Login extends Component {
-  state = {
+
+export const Login = () => {
+  const initialState = {
     username: '',
     password: '',
     accessToken: '',
+    isSubmitting: false,
+    errorMessage: null,
   };
-  componentDidMount() {
-    this.postDataHandler();
-  }
-  postDataHandler = () => {
+  const [data, setData] = React.useState(initialState);
+  const inputChangeHandler = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+  // componentDidMount() {
+  //   this.postDataHandler();
+  // }
+  const postDataHandler = () => {
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
     const userLogin = {
-      username: this.state.username,
-      password: this.state.password,
+      username: data.username,
+      password: data.password,
       type: 'USER_PASSWORD_AUTH',
     };
     const postHeaders = {
@@ -37,21 +54,26 @@ class Login extends Component {
       });
   };
 
-  render() {
-    return (
-      <Grid>
-        <Paper elevation={10} className="paperStyle">
-          <Grid align="center">
-            <Avatar style={{ backgroundColor: purple[200] }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <h2>Sign in</h2>
+  return (
+    <Grid>
+      <Paper elevation={10} className="paperStyle">
+        <Grid align="center">
+          <Avatar style={{ backgroundColor: purple[200] }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <h2>Sign in</h2>
+
+          <form>
             <Grid className="textInput">
               <TextField
                 fullWidth
                 label="User Name"
                 placeholder="Enter User Name"
                 required
+                value={data.username}
+                onChange={inputChangeHandler}
+                name="username"
+                id="username"
               ></TextField>
               <Grid className="textInput">
                 <TextField
@@ -60,23 +82,34 @@ class Login extends Component {
                   placeholder="Enter Password"
                   type="password"
                   required
+                  value={data.password}
+                  onChange={inputChangeHandler}
+                  name="password"
+                  id="password"
                 ></TextField>
               </Grid>
             </Grid>
-          </Grid>
-          <Button
-            onClick={this.postDataHandler}
-            fullWidth
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Sign in
-          </Button>
-        </Paper>
-      </Grid>
-    );
-  }
-}
+            <Button
+              onClick={postDataHandler}
+              fullWidth
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={data.isSubmitting}
+            >
+              {data.errorMessage && (
+                <Alert severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                  <span>{data.errorMessage}</span>
+                </Alert>
+              )}
+              {data.isSubmitting ? 'Loading' : 'Sign in'}
+            </Button>
+          </form>
+        </Grid>
+      </Paper>
+    </Grid>
+  );
+};
 
 export default Login;
