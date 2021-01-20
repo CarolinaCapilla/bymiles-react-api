@@ -1,96 +1,46 @@
 import React from 'react';
-import axios from 'axios';
 
-import './PolicyDetails.css';
-import { Grid, Paper, Card, CardContent, Typography } from '@material-ui/core';
-import purple from '@material-ui/core/colors/purple';
-import grey from '@material-ui/core/colors/grey';
+// import { AuthContext } from '../../App';
+// import PolicyCard from '../PolicyCard/PolicyCard';
 
-export const PolicyDetails = ({ props }) => {
-  // state = {
-  //   policyRef: '',
-  //   coverType: '',
-  //   car: '',
-  //   address: '',
-  // };
-  // componentDidMount() {
-  //   this.getDataHandler();
-  // }
-  const getDataHandler = () => {
-    const getHeaders = {
-      environment: 'mock',
-      Authorization: 'Bearer MuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0zX3JkdldSMGs',
-      'Content-type': 'application/json',
-    };
-    axios
-      .get('https://api.bybits.co.uk/policys/details', {
-        headers: getHeaders,
-      })
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          policyRef: response.data.policy.policy_ref,
-          coverType: response.data.policy.cover,
-          car:
-            response.data.vehicle.colour +
-            response.data.vehicle.make +
-            response.data.vehicle.model,
-          address:
-            response.data.policy.address.line_1 +
-            response.data.policy.address.line_2 +
-            response.data.policy.address.postcode,
-        });
-      });
-  };
+const initialState = {
+  policyDetails: [],
+  isFetching: false,
+  hasError: false,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_POLICY_REQUEST':
+      return {
+        ...state,
+        isFetching: true,
+        hasError: false,
+      };
+    case 'FETCH_POLICY_SUCCESS':
+      return {
+        ...state,
+        isFetching: false,
+        policyDetails: action.payload,
+      };
+    case 'FETCH_POLICY_FAILED':
+      return {
+        ...state,
+        hasError: true,
+        isFetching: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const PolicyDetails = () => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
-    <Grid>
-      <Paper elevation={10} className="policyStyle">
-        <Grid
-          align="center"
-          style={{ color: purple[200] }}
-          className="textInput"
-        >
-          <h2>My Policy</h2>
-          <Grid>
-            <Card style={{ border: 'none', boxShadow: 'none' }}>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Policy Reference:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {props.policyRef}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Cover Type:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {props.coverType}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Car:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {props.car}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Address:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {props.address}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Grid>
-  );
+    <div>
+      {state.policyDetails.length > 0 }
+    </div>
+  )
 };
 
 export default PolicyDetails;

@@ -8,18 +8,21 @@ export const AuthContext = React.createContext();
 const initialState = {
   isAuthenticated: false,
   user: null,
-  token: null,
+  access_token: null,
 };
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
       localStorage.setItem('user', JSON.stringify(action.payload.user));
-      localStorage.setItem('token', JSON.stringify(action.payload.token));
+      localStorage.setItem(
+        'access_token',
+        JSON.stringify(action.payload.access_token)
+      );
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload.user,
-        token: action.payload.token,
+        access_token: action.payload.access_token,
       };
     case 'LOGOUT':
       localStorage.clear();
