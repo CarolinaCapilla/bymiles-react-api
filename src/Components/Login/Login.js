@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import './Login.css';
 import { AuthContext } from '../../App';
@@ -40,23 +39,23 @@ export const Login = () => {
       environment: 'mock',
       'Content-type': 'application/json',
     };
-    axios
-      .post('https://api.bybits.co.uk/auth/token', userLogin, {
-        headers: postHeaders,
+    fetch('https://api.bybits.co.uk/auth/token', {
+      method: 'post',
+      headers: postHeaders,
+      body: JSON.stringify({
+        userLogin,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw res;
       })
-      // .then((response) => {
-      //   // console.log(response);
-      //   // accessToken.useState({ accessToken: response.data.access_token });
-      //   // console.log(accessToken);
-      //   if (response.ok) {
-      //     return response;
-      //   }
-      //   throw response;
-      // })
-      .then((response) => {
+      .then((resJson) => {
         dispatch({
           type: 'LOGIN',
-          payload: response,
+          payload: resJson,
         });
       })
       .catch((error) => {
