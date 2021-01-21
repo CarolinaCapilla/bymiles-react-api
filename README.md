@@ -44,7 +44,7 @@ Open your favourite browser and navigate to http://localhost:port-number/.
 - 2 hours for designing both pages.
 - 8-10 hours approx (in the span of 4 days) to write the code and test that it works fine.
 
-## Libraries used, decisions and Why
+## Libraries used, decisions and why
 
 Libraries:
 - Material UI: Although I could have used pure CSS to achieve the same results in terms of design. I have decided to use Material UI for 3 reasons. I have never used it before and I really wanted to try it out. Faster and easier stylized web development. Responsive designs right out of the box.
