@@ -16,7 +16,7 @@ const LoginForm = (props) => {
           </Avatar>
           <h2>Sign in</h2>
 
-          <form onSubmit={props.form}>
+          <form onSubmit={props.submitForm}>
             <Grid className="textInput">
               <TextField
                 fullWidth
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
                 placeholder="Enter User Name"
                 required
                 value={props.username}
-                onChange={props.input}
+                onChange={props.userInput}
                 name="username"
                 id="username"
               ></TextField>
@@ -47,9 +47,9 @@ const LoginForm = (props) => {
               type="submit"
               variant="contained"
               color="primary"
-              disabled={props.buttonSubmit}
+              disabled={props.button}
             >
-              {props.buttonSubmit ? 'Loading' : 'Sign in'}
+              {props.button ? 'Loading' : 'Sign in'}
             </Button>
           </form>
         </Grid>

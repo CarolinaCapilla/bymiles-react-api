@@ -13,8 +13,10 @@ export const PolicyDetails = () => {
     hasError: false,
     errorMessage: null,
   };
+
   const { state: authState } = React.useContext(AuthContext);
   const [data, setData] = React.useState(initialState);
+
   const reducer = (data, action) => {
     switch (action.type) {
       case 'FETCH_POLICY_REQUEST':
@@ -40,10 +42,9 @@ export const PolicyDetails = () => {
     }
   };
   const [, dispatch] = React.useReducer(reducer, initialState);
-  React.useEffect(() => {
-    dispatch({
-      type: 'FETCH_POLICY_REQUEST',
-    });
+
+  // GET request to API
+  const getPolicyDetailsHandler = () => {
     const getHeaders = {
       environment: 'mock',
       Authorization: `Bearer ${authState.access_token}`,
@@ -60,19 +61,11 @@ export const PolicyDetails = () => {
         }
       })
       .then((resJson) => {
-        console.log(resJson);
         setData({
           policyRef: resJson.policy.policy_ref,
           coverType: resJson.policy.cover,
-          car:
-            resJson.vehicle.make +
-            resJson.vehicle.model +
-            resJson.vehicle.colour +
-            resJson.vehicle.reg,
-          address:
-            resJson.policy.address.line_1 +
-            resJson.policy.address.line_2 +
-            resJson.policy.address.postcode,
+          car: `${resJson.vehicle.make}${resJson.vehicle.model}${resJson.vehicle.colour}${resJson.vehicle.reg}`,
+          address: `${resJson.policy.address.line_1} ${resJson.policy.address.line_2}${resJson.policy.address.postcode}`,
         });
         dispatch({
           type: 'FETCH_POLICY_SUCCESS',
@@ -85,10 +78,18 @@ export const PolicyDetails = () => {
           errorMessage: error.message || error.statusText,
         });
       });
+  };
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'FETCH_POLICY_REQUEST',
+    });
+    getPolicyDetailsHandler();
   }, [authState.access_token]);
 
   // Formatting of data fetched from the API
   const formattedPolicyRef = data.policyRef.replaceAll('-', ' ');
+
   const makeOfCar = data.car.substr(0, 5);
   const makeOfCarCapitalized =
     makeOfCar.charAt(0).toUpperCase() + makeOfCar.slice(1);
@@ -100,6 +101,7 @@ export const PolicyDetails = () => {
     '-' +
     colourCar.slice(5);
   const carFormatted = `${makeOfCarCapitalized} ${modelCar} ${colourCarCapitalized}`;
+
   const address1 = data.address.substr(0, 6);
   const address2 = data.address.substr(7, 14);
   const address3 = data.address.slice(21, 35);

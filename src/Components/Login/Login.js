@@ -5,6 +5,7 @@ import { AuthContext } from '../../App';
 
 export const Login = () => {
   const { dispatch } = React.useContext(AuthContext);
+
   const initialState = {
     username: '',
     password: '',
@@ -12,20 +13,18 @@ export const Login = () => {
     isSubmitting: false,
     errorMessage: null,
   };
+
   const [data, setData] = React.useState(initialState);
+
   const inputChangeHandler = (event) => {
     setData({
       ...data,
       [event.target.name]: event.target.value,
     });
   };
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
-    setData({
-      ...data,
-      isSubmitting: true,
-      errorMessage: null,
-    });
+
+  // POST request to API
+  const postLoginHandler = () => {
     const userLogin = {
       username: data.username,
       password: data.password,
@@ -63,14 +62,24 @@ export const Login = () => {
       });
   };
 
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    setData({
+      ...data,
+      isSubmitting: true,
+      errorMessage: null,
+    });
+    postLoginHandler();
+  };
+
   return (
     <LoginForm
       username={data.username}
-      form={formSubmitHandler}
-      input={inputChangeHandler}
+      submitForm={formSubmitHandler}
+      userInput={inputChangeHandler}
       password={data.password}
       passwordInput={inputChangeHandler}
-      buttonSubmit={data.isSubmitting}
+      button={data.isSubmitting}
       error={data.errorMessage}
     ></LoginForm>
   );
