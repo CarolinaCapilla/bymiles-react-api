@@ -9,13 +9,30 @@ This criteria being:
   - The login has to be authorised with a token.
   - We make a POST request to the Login API endpoint with the username, password and type. We receive a response an store the access_token to then authorise the user's login.
   - Once authorised, we will redirect the user to the second page.
-  
 
 ## Prerequisites
+Node.js v6.0 or greater <br>
+Package Manager: NPM or Yarn (you will need to have NPM installed in order to install and use Yarn).
 
 ## Installation
 
-Cloning repo
+Cloning repository to your local machine.
 
 #### SSH
+Run in your terminal
+`git clone git@github.com:CarolinaCapilla/bymiles-react-api.git your-app-name`
+#### HTTPS
+Run in your terminal
+`git clone https://github.com/CarolinaCapilla/bymiles-react-api.git your-app-name`
+#### Github CLI
+Run in your terminal
+`gh repo clone CarolinaCapilla/bymiles-react-api your-app-name` <br>
+Bare on mind that for `gh repo clone` command to work you will need to have Github CLI installed. Here's the link to its repository which contains detailed step by step installation process [Github CLI Repository](https://github.com/cli/cli)
 
+Once the repository has been cloned to your local machine, move into the `your-app-name` folder.
+Run `yarn` to install npm dependencies
+or 
+`npm install` to install all the dependencies needed to run the app properly.
+
+#### Running locally
+To run the app, after installing all the dependencies. Run `yarn start` or `npm start` then open your favourite browser and navigate to http://localhost:port-number/
