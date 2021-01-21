@@ -102,7 +102,7 @@ export const PolicyDetails = () => {
                   Policy Reference:
                 </Typography>
                 <Typography style={{ color: grey[600] }}>
-                  {data.policyRef}
+                  {data.policyRef.replaceAll('-', ' ')}
                 </Typography>
               </CardContent>
               <CardContent>
