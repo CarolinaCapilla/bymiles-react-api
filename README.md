@@ -11,28 +11,31 @@ This criteria being:
   - Once authorised, we will redirect the user to the second page.
 
 ## Prerequisites
-Node.js v6.0 or greater <br>
-Package Manager: NPM or Yarn (you will need to have NPM installed in order to install and use Yarn).
+1. Node.js v6.0 or greater <br>
+2. Package Manager: NPM or Yarn (you will need to have NPM installed in order to install and use Yarn).
 
 ## Installation
 
 Cloning repository to your local machine.
 
 #### SSH
-Run in your terminal
+Run in your terminal.
 `git clone git@github.com:CarolinaCapilla/bymiles-react-api.git your-app-name`
 #### HTTPS
-Run in your terminal
+Run in your terminal.
 `git clone https://github.com/CarolinaCapilla/bymiles-react-api.git your-app-name`
 #### Github CLI
-Run in your terminal
+Run in your terminal.
 `gh repo clone CarolinaCapilla/bymiles-react-api your-app-name` <br>
-Bare on mind that for `gh repo clone` command to work you will need to have Github CLI installed. Here's the link to its repository which contains detailed step by step installation process [Github CLI Repository](https://github.com/cli/cli)
+Bare on mind that for `gh repo clone` command to work you will need to have Github CLI installed. Here's the link to its repository which contains detailed step by step installation process [Github CLI Repository](https://github.com/cli/cli).
 
-Once the repository has been cloned to your local machine, move into the `your-app-name` folder.
-Run `yarn` to install npm dependencies
-or 
-`npm install` to install all the dependencies needed to run the app properly.
+Inside the repo folder.
+Run `yarn` or  `npm install` to install all the dependencies needed to run the app properly.
 
-#### Running locally
-To run the app, after installing all the dependencies. Run `yarn start` or `npm start` then open your favourite browser and navigate to http://localhost:port-number/
+## Running locally
+Run `yarn start` or `npm start` then open your favourite browser and navigate to http://localhost:port-number/.
+
+## Estimate time of completion
+- 2-3 hours of research.
+- 2 hours for designing both pages.
+- 12 hours approx (in the span of 4 days) to write the code and test that it works fine.
