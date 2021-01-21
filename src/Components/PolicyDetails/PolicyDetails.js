@@ -90,6 +90,7 @@ export const PolicyDetails = () => {
       });
   }, [authState.access_token]);
 
+  // Formatting of data fetched from the API
   const formattedPolicyRef = data.policyRef.replaceAll('-', ' ');
   const makeOfCar = data.car.substr(0, 5);
   const makeOfCarCapitalized =
@@ -102,6 +103,11 @@ export const PolicyDetails = () => {
     '-' +
     colourCar.slice(5);
   const carFormatted = `${makeOfCarCapitalized} ${modelCar} ${colourCarCapitalized}`;
+  const address1 = data.address.substr(0, 6);
+  const address2 = data.address.substr(7, 14);
+  const address3 = data.address.slice(21, 35);
+  const address4 = data.address.substr(35, 40);
+  const addressFormatted = `${address1}, ${address2}, ${address3}, ${address4}`;
 
   return (
     <Grid>
@@ -139,7 +145,7 @@ export const PolicyDetails = () => {
                   Address:
                 </Typography>
                 <Typography style={{ color: grey[600] }}>
-                  {data.address}
+                  {addressFormatted}
                 </Typography>
               </CardContent>
             </Card>
