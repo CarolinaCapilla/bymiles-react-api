@@ -1,10 +1,7 @@
 import React from 'react';
 
-import './PolicyDetails.css';
+import PolicyCard from '../PolicyCard/PolicyCard';
 import { AuthContext } from '../../App';
-import { Grid, Paper, Card, CardContent, Typography } from '@material-ui/core';
-import purple from '@material-ui/core/colors/purple';
-import grey from '@material-ui/core/colors/grey';
 
 export const PolicyDetails = () => {
   const initialState = {
@@ -85,7 +82,7 @@ export const PolicyDetails = () => {
       .catch((error) => {
         dispatch({
           type: 'FETCH_POLICY_FAILED',
-          errorMessage: error,
+          errorMessage: error.message || error.statusText,
         });
       });
   }, [authState.access_token]);
@@ -110,49 +107,13 @@ export const PolicyDetails = () => {
   const addressFormatted = `${address1}, ${address2}, ${address3}, ${address4}`;
 
   return (
-    <Grid>
-      <Paper elevation={10} className="policyStyle">
-        <Grid align="center" style={{ color: purple[200] }}>
-          <h2>My Policy</h2>
-          <Grid>
-            <Card style={{ border: 'none', boxShadow: 'none' }}>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Policy Reference:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {formattedPolicyRef}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Cover Type:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {data.coverType}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Car:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {carFormatted}
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h6" style={{ color: grey[900] }}>
-                  Address:
-                </Typography>
-                <Typography style={{ color: grey[600] }}>
-                  {addressFormatted}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Grid>
+    <PolicyCard
+      policyRef={formattedPolicyRef}
+      cover={data.coverType}
+      car={carFormatted}
+      address={addressFormatted}
+      error={data.errorMessage}
+    ></PolicyCard>
   );
 };
 
