@@ -91,7 +91,6 @@ export const PolicyDetails = () => {
   }, [authState.access_token]);
 
   const formattedPolicyRef = data.policyRef.replaceAll('-', ' ');
-  // const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
   const makeOfCar = data.car.substr(0, 5);
   const makeOfCarCapitalized =
     makeOfCar.charAt(0).toUpperCase() + makeOfCar.slice(1);
