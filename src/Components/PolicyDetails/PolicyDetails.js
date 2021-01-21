@@ -104,8 +104,8 @@ export const PolicyDetails = () => {
 
   const address1 = data.address.substr(0, 6);
   const address2 = data.address.substr(7, 14);
-  const address3 = data.address.slice(21, 35);
-  const address4 = data.address.substr(35, 40);
+  const address3 = data.address.slice(21, 36);
+  const address4 = data.address.substr(36, 40);
   const addressFormatted = `${address1}, ${address2}, ${address3}, ${address4}`;
 
   return (
