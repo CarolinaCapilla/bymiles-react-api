@@ -1,4 +1,7 @@
 # By Bits Code Challenge
+![React](https://img.shields.io/badge/react-v17.0.1-blue.svg)
+![ReactDOM](https://img.shields.io/badge/reactDOM-v17.0.1-blue.svg)
+![ReactSCRIPTS](https://img.shields.io/badge/reactScripts-v12.1.8-blue.svg)
 
 The purpose of this repository is to meet the criteria of the By Bits Coding Challenge. <br>
 This criteria being:
@@ -33,9 +36,25 @@ Inside the repo folder.
 Run `yarn` or  `npm install` to install all the dependencies needed to run the app properly.
 
 ## Running locally
-Run `yarn start` or `npm start` then open your favourite browser and navigate to http://localhost:port-number/.
+Run `yarn start` or `npm start` <br>
+Open your favourite browser and navigate to http://localhost:port-number/.
 
 ## Estimate time of completion
 - 2-3 hours of research.
 - 2 hours for designing both pages.
-- 12 hours approx (in the span of 4 days) to write the code and test that it works fine.
+- 10 hours or less approx (in the span of 4 days) to write the code and test that it works fine.
+
+## Libraries used, decisions and Why
+
+Libraries:
+- Material UI: Although I could have used pure CSS to achieve the same results in terms of design. I have decided to use Material UI for 3 reasons. I have never used it before and I really wanted to try it out. Faster and easier stylized web development. Responsive designs right out of the box.
+
+Decisions: 
+- Functional or Stateless components. Since I have decided to use Hooks it was a necessary decision to use functional components.
+- Hooks. I use Hooks together with Context to manage the state of the components in our app and also take care of conditionally rendering one or the other if a condition is met.   As with the design, I could have achieve the same results with Class-Based or Stateful components but in order to make the logic of the app less complex and more readable I've   decided to use Hooks. Also it was my first time using Hooks so it was a good chance for me to learn more about them and their usage.
+- Fetch API instead of Axios. After thinking what was that I needed to do with the API provided. I've decided that the features in the Fetch API were good enough to meet those     needs and therefore it was not necessary to add an extra library to my react project in order to make it work properly.
+- Splitting components into presentational and functional components. In order to make the project structure more organised and the code easier to read, maintain and reuse. I've split the 2 main components Login and PolicyDetails into 4 components. Login(functional component, logic and state is handle there) LoginFrom(presentational component) PolicyDetails(functional component, logic and state is handle there) PolicyCard(presentational component).
+- Keeping function declarations concise and declare them to take care of only 1 responsibility/action. Again, more organised, easier to read, maintain and reuse code.
+
+**This challenge has been super fun to do, I have learnt a lot and enjoyed myself, it was hard at times but the result is very rewarding and definitely worth it. I am very happy that I was given the chance to get this challenge done. I have put my whole heart and effort on it and I do hope you enjoy it as much as I did!**
+
