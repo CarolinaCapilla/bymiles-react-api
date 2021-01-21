@@ -42,7 +42,7 @@ Open your favourite browser and navigate to http://localhost:port-number/.
 ## Estimate time of completion
 - 2-3 hours of research.
 - 2 hours for designing both pages.
-- 10 hours or less approx (in the span of 4 days) to write the code and test that it works fine.
+- 8-10 hours approx (in the span of 4 days) to write the code and test that it works fine.
 
 ## Libraries used, decisions and Why
 
