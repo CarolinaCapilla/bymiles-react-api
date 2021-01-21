@@ -1,11 +1,8 @@
 import React from 'react';
 
 import './Login.css';
+import LoginForm from '../LoginForm/LoginForm';
 import { AuthContext } from '../../App';
-import { Avatar, Button, Grid, Paper, TextField } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import purple from '@material-ui/core/colors/purple';
 
 export const Login = () => {
   const { dispatch } = React.useContext(AuthContext);
@@ -68,59 +65,15 @@ export const Login = () => {
   };
 
   return (
-    <Grid>
-      <Paper elevation={10} className="paperStyle">
-        <Grid align="center">
-          <Avatar style={{ backgroundColor: purple[200] }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <h2>Sign in</h2>
-
-          <form onSubmit={formSubmitHandler}>
-            <Grid className="textInput">
-              <TextField
-                fullWidth
-                label="User Name"
-                placeholder="Enter User Name"
-                required
-                value={data.username}
-                onChange={inputChangeHandler}
-                name="username"
-                id="username"
-              ></TextField>
-              <Grid className="textInput">
-                <TextField
-                  fullWidth
-                  label="Password"
-                  placeholder="Enter Password"
-                  type="password"
-                  required
-                  value={data.password}
-                  onChange={inputChangeHandler}
-                  name="password"
-                  id="password"
-                ></TextField>
-              </Grid>
-            </Grid>
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={data.isSubmitting}
-            >
-              {data.isSubmitting ? 'Loading' : 'Sign in'}
-            </Button>
-          </form>
-        </Grid>
-      </Paper>
-      {data.errorMessage && (
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          <span>{data.errorMessage}</span>
-        </Alert>
-      )}
-    </Grid>
+    <LoginForm
+      username={data.username}
+      form={formSubmitHandler}
+      input={inputChangeHandler}
+      password={data.password}
+      passwordInput={inputChangeHandler}
+      buttonSubmit={data.isSubmitting}
+      error={data.errorMessage}
+    ></LoginForm>
   );
 };
 
