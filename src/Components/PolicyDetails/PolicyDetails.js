@@ -63,6 +63,7 @@ export const PolicyDetails = () => {
         }
       })
       .then((resJson) => {
+        console.log(resJson);
         setData({
           policyRef: resJson.policy.policy_ref,
           coverType: resJson.policy.cover,
@@ -80,7 +81,6 @@ export const PolicyDetails = () => {
           type: 'FETCH_POLICY_SUCCESS',
           payload: resJson,
         });
-        console.log(resJson);
       })
       .catch((error) => {
         dispatch({
@@ -89,6 +89,20 @@ export const PolicyDetails = () => {
         });
       });
   }, [authState.access_token]);
+
+  const formattedPolicyRef = data.policyRef.replaceAll('-', ' ');
+  // const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
+  const makeOfCar = data.car.substr(0, 5);
+  const makeOfCarCapitalized =
+    makeOfCar.charAt(0).toUpperCase() + makeOfCar.slice(1);
+  const modelCar = data.car.charAt(5);
+  const colourCar = data.car.substr(6, 10);
+  const colourCarCapitalized =
+    colourCar.charAt(0).toUpperCase() +
+    colourCar.slice(1, 5) +
+    '-' +
+    colourCar.slice(5);
+  const carFormatted = `${makeOfCarCapitalized} ${modelCar} ${colourCarCapitalized}`;
 
   return (
     <Grid>
@@ -102,7 +116,7 @@ export const PolicyDetails = () => {
                   Policy Reference:
                 </Typography>
                 <Typography style={{ color: grey[600] }}>
-                  {data.policyRef.replaceAll('-', ' ')}
+                  {formattedPolicyRef}
                 </Typography>
               </CardContent>
               <CardContent>
@@ -117,7 +131,9 @@ export const PolicyDetails = () => {
                 <Typography variant="h6" style={{ color: grey[900] }}>
                   Car:
                 </Typography>
-                <Typography style={{ color: grey[600] }}>{data.car}</Typography>
+                <Typography style={{ color: grey[600] }}>
+                  {carFormatted}
+                </Typography>
               </CardContent>
               <CardContent>
                 <Typography variant="h6" style={{ color: grey[900] }}>
